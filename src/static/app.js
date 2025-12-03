@@ -523,10 +523,15 @@ document.addEventListener("DOMContentLoaded", () => {
       </span>
     `;
 
-    // Create difficulty tag if difficulty is specified
-    const difficultyTagHtml = details.difficulty
-      ? `<span class="difficulty-tag ${details.difficulty.toLowerCase()}">${details.difficulty}</span>`
-      : "";
+    // Create difficulty tag if difficulty is specified and valid
+    const validDifficulties = ["beginner", "intermediate", "advanced"];
+    let difficultyTagHtml = "";
+    if (details.difficulty) {
+      const difficultyLower = details.difficulty.toLowerCase();
+      if (validDifficulties.includes(difficultyLower)) {
+        difficultyTagHtml = `<span class="difficulty-tag ${difficultyLower}">${details.difficulty}</span>`;
+      }
+    }
 
     // Create capacity indicator
     const capacityIndicator = `
