@@ -539,10 +539,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="share-buttons">
         <span class="share-label">Share:</span>
         <a href="${shareUrls.twitter}" target="_blank" rel="noopener noreferrer" class="share-button share-twitter" title="Share on Twitter">
-          𝕏
+          X
         </a>
         <a href="${shareUrls.facebook}" target="_blank" rel="noopener noreferrer" class="share-button share-facebook" title="Share on Facebook">
-          f
+          F
         </a>
         <a href="${shareUrls.email}" class="share-button share-email" title="Share via Email">
           ✉
