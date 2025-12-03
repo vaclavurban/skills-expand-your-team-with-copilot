@@ -472,6 +472,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Function to generate social share URLs
+  function generateShareUrls(activityName, description) {
+    const pageUrl = window.location.origin;
+    const shareText = `Check out ${activityName} at Mergington High School: ${description}`;
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(pageUrl);
+
+    return {
+      twitter: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`,
+      email: `mailto:?subject=${encodeURIComponent(`Join ${activityName} at Mergington High School`)}&body=${encodeURIComponent(`${shareText}\n\nLearn more at: ${pageUrl}`)}`
+    };
+  }
+
   // Function to render a single activity card
   function renderActivityCard(name, details) {
     const activityCard = document.createElement("div");
@@ -519,6 +533,23 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    // Create social sharing buttons
+    const shareUrls = generateShareUrls(name, details.description);
+    const shareButtonsHtml = `
+      <div class="share-buttons">
+        <span class="share-label">Share:</span>
+        <a href="${shareUrls.twitter}" target="_blank" rel="noopener noreferrer" class="share-button share-twitter" title="Share on Twitter">
+          X
+        </a>
+        <a href="${shareUrls.facebook}" target="_blank" rel="noopener noreferrer" class="share-button share-facebook" title="Share on Facebook">
+          F
+        </a>
+        <a href="${shareUrls.email}" class="share-button share-email" title="Share via Email">
+          ✉
+        </a>
+      </div>
+    `;
+
     activityCard.innerHTML = `
       ${tagHtml}
       <h4>${name}</h4>
@@ -528,6 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="tooltip-text">Regular meetings at this time throughout the semester</span>
       </p>
       ${capacityIndicator}
+      ${shareButtonsHtml}
       <div class="participants-list">
         <h5>Current Participants:</h5>
         <ul>
